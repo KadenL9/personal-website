@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useAnimationFrame } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useAnimationFrame, animate, useMotionValue, useMotionValueEvent } from "framer-motion"; // FIXED: Added useMotionValue and useMotionValueEvent
 import { ExternalLink, Cpu } from "lucide-react";
 
 export default function ScreenProjects() {
@@ -32,7 +32,7 @@ export default function ScreenProjects() {
         setAngleOffset((prev) => prev + (delta * speedFactor * 0.01));
     });
 
-    // 1. Calculate matching paths for the 4 main project lines
+    // 1. Calculate matching paths for the 5 main project lines
     const calculatedPositions = projects.map((proj, index) => {
         const baseAngle = (index * (2 * Math.PI)) / projects.length;
         const currentAngle = baseAngle + angleOffset;
@@ -43,7 +43,7 @@ export default function ScreenProjects() {
         };
     });
 
-    // 2. Build the structural angles for the 16 ghost lines
+    // 2. Build the structural angles for the ghost lines
     const ghostSpokes = Array.from({ length: ghostCount }).map((_, index) => {
         const baseAngle = (index * (2 * Math.PI)) / ghostCount;
         return {
@@ -64,8 +64,8 @@ export default function ScreenProjects() {
                     <g transform="translate(512, 375)">
 
                         {/* ==========================================
-                THE 16 FLUID LENGTH GHOST SPOKES
-                ========================================== */}
+                        THE FLUID LENGTH GHOST SPOKES
+                        ========================================== */}
                         {ghostSpokes.map((spoke) => {
                             // Combine the structural base split with the overall master rotation offset
                             const currentAngle = spoke.baseAngle + angleOffset;
@@ -83,8 +83,8 @@ export default function ScreenProjects() {
                         })}
 
                         {/* ==========================================
-                THE 4 MAIN PROJECT HARDLINES
-                ========================================== */}
+                        THE MAIN PROJECT HARDLINES
+                        ========================================== */}
                         {calculatedPositions.map((node) => (
                             <g key={`line-${node.id}`}>
                                 <line x1="0" y1="0" x2={node.x} y2={node.y} className="stroke-theme-border-subtle/40" strokeWidth="1.25" />
@@ -166,34 +166,45 @@ export default function ScreenProjects() {
     );
 }
 
-/* ===================================================
-   FLUID GHOST LINES
-   =================================================== */
+/* =========================================================================
+   GHOST LINE SPOKE COMPONENT (Safe framer-motion subscriptions)
+   ========================================================================= */
 function GhostLineSpoke({ cos, sin, duration }: { cos: number; sin: number; duration: number }) {
-    // Isolate the length multiplier as an independent, smoothly looping value thread
     const [lengthFactor, setLengthFactor] = useState(120);
     const [opacityFactor, setOpacityFactor] = useState(0.3);
 
+    const rawLength = useMotionValue(35);
+    const rawOpacity = useMotionValue(0.1);
+
+    useEffect(() => {
+        const lengthAnimation = animate(rawLength, [35, 120, 50, 105, 35], {
+            duration: duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+        });
+
+        const opacityAnimation = animate(rawOpacity, [0.1, 0.5, 0.15, 0.45, 0.1], {
+            duration: duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+        });
+
+        return () => {
+            lengthAnimation.stop();
+            opacityAnimation.stop();
+        };
+    }, [rawLength, rawOpacity, duration]);
+
+    useMotionValueEvent(rawLength, "change", (latest) => {
+        setLengthFactor(latest);
+    });
+
+    useMotionValueEvent(rawOpacity, "change", (latest) => {
+        setOpacityFactor(latest);
+    });
+
     return (
         <g>
-            <motion.div
-                className="hidden"
-                animate={{
-                    spokeLength: [35, 120, 50, 105, 35],
-                    opacity: [0.1, 0.5, 0.15, 0.45, 0.1]
-                }}
-                transition={{
-                    duration: duration,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                }}
-                onUpdate={(latest: any) => {
-                    setLengthFactor(latest.spokeLength);
-                    setOpacityFactor(latest.opacity);
-                }}
-            />
-
-            {/* The visible vector line */}
             <line
                 x1="0"
                 y1="0"
@@ -203,8 +214,6 @@ function GhostLineSpoke({ cos, sin, duration }: { cos: number; sin: number; dura
                 className="stroke-theme-accent/50"
                 strokeWidth="1.25"
             />
-
-            {/* Edge vector dot particle tracking along the dynamic peak lengths */}
             <circle
                 cx={cos * lengthFactor}
                 cy={sin * lengthFactor}
@@ -216,9 +225,9 @@ function GhostLineSpoke({ cos, sin, duration }: { cos: number; sin: number; dura
     );
 }
 
-/* ==========================================
-   EXPANDABLE PROJECT CARD SUB-COMPONENT
-   ========================================== */
+/* =========================================================================
+   EXPANDABLE PROJECT CARD SUB-COMPONENT (Restored Sub-Component)
+   ========================================================================= */
 function ProjectCard({ project }: { project: any }) {
     return (
         <div className="w-full bg-theme-cell border border-theme-border-main rounded-xl p-4 font-mono backdrop-blur-md shadow-xl text-left hover:border-theme-accent hover:shadow-[0_0_20px_rgba(109,40,217,0.15)] transition-all duration-300 pointer-events-auto group overflow-hidden">
