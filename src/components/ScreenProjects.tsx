@@ -225,7 +225,7 @@ function ProjectCard({ project }: { project: any }) {
 
             <div className="flex justify-between items-center border-b border-theme-border-subtle pb-2 mb-2">
                 <span className="text-[8px] font-bold text-theme-accent tracking-widest uppercase">[{project.id}]</span>
-                <div className="w-1.5 h-1.5 rounded-full bg-theme-border-subtle group-hover:bg-theme-accent transition-colors duration-300" />
+                <div className="w-1.5 h-1.5 rounded-full bg-theme-accent group-hover:bg-theme-accent transition-colors duration-300" />
             </div>
 
             <h3 className="text-xs font-black text-foreground uppercase tracking-wider">
