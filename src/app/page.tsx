@@ -1,15 +1,27 @@
 "use client";
 
 import { useScroll, AnimatePresence, motion, useMotionValueEvent } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sun, Moon } from "lucide-react";
 import ScreenAbout from "../components/ScreenAbout";
 import ScreenProjects from "../components/ScreenProjects";
+import ScreenProjectsMobile from "../components/ScreenProjectsMobile";
 import ScreenExperience from "../components/ScreenExperience";
 
 export default function Home() {
     const [stage, setStage] = useState(0);
     const [isDarkMode, setIsDarkMode] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
 
     const { scrollYProgress } = useScroll();
 
@@ -23,10 +35,23 @@ export default function Home() {
         }
     });
 
+    const projects = [
+        { id: "DASHBOARD", title: "NBA Stats Analyzer", desc: "Dashboard that visualizes statistical breakdowns of NBA players.", tech: "[PYTHON][Tkinter][Matplotlib]", link: "https://github.com/KadenL9/NBA-Stats-Visualizer" },
+        { id: "GAME 2", title: "Wordle Clone", desc: "Custom clone of the popular New York Times game Wordle.", tech: "[Python][Pygame]", link: "https://github.com/KadenL9/Wordle-Clone" },
+        { id: "GAME 1", title: "2048 Clone", desc: "Custom clone of the popular mobile game 2048.", tech: "[Python][Pygame]", link: "https://github.com/KadenL9/2048" },
+        { id: "PLUGIN", title: "Minecraft DeathSwap", desc: "Custom Minecraft plugin. Game where players try to kill each other when swapping positions.", tech: "[Java][Spigot API]", link: "https://github.com/KadenL9/MinecraftDeathSwap" },
+        { id: "PORTFOLIO", title: "Portfolio Website", desc: "Personal portfolio website to showcase projects, technical skills, and experience.", tech: "[TS][CSS][JS][Node.js]", link: "https://github.com/KadenL9/personal-website"}
+    ];
+
     const renderStageContent = () => {
         switch (stage) {
             case 0: return <ScreenAbout />;
-            case 1: return <ScreenProjects />;
+            case 1: 
+                return isMobile ? (
+                    <ScreenProjectsMobile projects={projects}/>
+                ) : (
+                    <ScreenProjects />
+                );
             case 2: return <ScreenExperience />;
             default: return null;
         }
