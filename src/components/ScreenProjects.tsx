@@ -59,7 +59,7 @@ export default function ScreenProjects() {
 
             {/* DYNAMIC CONNECTING WEB LINES & HUD GRID LAYER */}
             <div className="absolute inset-0 pointer-events-none z-10">
-                <svg className="w-full h-full overflow-visible" style={{ position: 'absolute', top: 0, left: 0 }}>
+                <svg width="1024" height="750" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible">
                     {/* Shift SVG canvas orientation coordinates directly to the exact page center point */}
                     <g transform="translate(512, 375)">
 

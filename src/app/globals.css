@@ -53,3 +53,16 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   transition: background-color 300ms ease, color 300ms ease;
 }
+
+/* Responsive View Separation Rules to eliminate hydration mismatch and layout shifts */
+@media (max-width: 1023px), (max-height: 699px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) and (min-height: 700px) {
+  .mobile-only {
+    display: none !important;
+  }
+}

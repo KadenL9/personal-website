@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Crosshair, ShieldCheck, Activity } from "lucide-react";
 
-export default function PlayerScan({ isDarkMode = true }: { isDarkMode?: boolean }) {
+export default function PlayerScan({ isDarkMode = true, className = "w-[320px] h-[420px]" }: { isDarkMode?: boolean; className?: string }) {
     const [scanProgress, setScanProgress] = useState(0);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function PlayerScan({ isDarkMode = true }: { isDarkMode?: boolean
     }, []);
 
     return (
-        <div className="relative w-[320px] h-[420px] bg-theme-bg text-foreground border border-theme-border-main rounded-2xl flex flex-col justify-between p-5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden font-mono">
+        <div className={`relative bg-theme-bg text-foreground border border-theme-border-main rounded-2xl flex flex-col justify-between p-5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden font-mono ${className}`}>
 
             {/* 1. HUD CORNER BRACKETS */}
             <div className="absolute inset-0 pointer-events-none opacity-40">
