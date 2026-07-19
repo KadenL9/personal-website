@@ -59,7 +59,7 @@ export default function DesktopView({
     };
 
     return (
-        <div className="relative w-full h-[400vh]">
+        <div className="relative w-full h-[300vh]">
             <div className="relative w-full flex flex-col justify-between p-6 md:p-12 sticky top-0 h-screen overflow-hidden z-10">
                 {/* Fluid Background Waves */}
                 <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none transition-colors duration-500">

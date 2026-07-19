@@ -52,6 +52,11 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   transition: background-color 300ms ease, color 300ms ease;
+  overscroll-behavior: none;
+}
+
+html {
+  overscroll-behavior: none;
 }
 
 /* Responsive View Separation Rules to eliminate hydration mismatch and layout shifts */
