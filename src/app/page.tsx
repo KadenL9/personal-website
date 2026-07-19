@@ -6,7 +6,7 @@ import MobileView from "../components/MobileView";
 import { projects, experiences, contactLinks } from "../data/portfolioData";
 
 export default function Home() {
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     return (
         <div className={`relative w-full text-foreground select-none transition-colors duration-500 ${isDarkMode ? "bg-theme-bg dark" : "bg-neutral-50 light"}`}>
