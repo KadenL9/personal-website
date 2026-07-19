@@ -22,8 +22,20 @@ export default function ScreenAboutMobile({ isDarkMode }: { isDarkMode: boolean 
   const myAge = getDynamicAgeByMonth(2005, 9);
 
   return (
-    <div className="w-full max-w-md mx-auto flex flex-col gap-6 py-6 px-4 select-none">
+    <div className="relative w-full max-w-md mx-auto flex flex-col gap-10 py-6 px-4 select-none">
       
+      {/* Centered Vertical Purple Connecting Line & Dot */}
+      <div className="absolute left-1/2 top-12 bottom-12 w-[1.5px] bg-theme-accent/20 -translate-x-1/2 z-0">
+        <div 
+          className="absolute inset-0 w-full bg-gradient-to-b from-theme-accent/40 via-theme-accent to-theme-accent/40 opacity-60"
+          style={{ filter: "drop-shadow(0px 0px 4px var(--color-accent))" }}
+        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center">
+          <div className="absolute w-5 h-5 rounded-full bg-theme-accent/20 animate-ping [animation-duration:3.5s]" />
+          <div className="w-2.5 h-2.5 rounded-full bg-theme-accent shadow-[0_0_8px_var(--color-accent)]" />
+        </div>
+      </div>
+
       {/* 1. PILOT PROFILE CARD (Combines PLAYER_CARD & RECRUIT_CLASS info) */}
       <div className="w-full bg-theme-cell border border-theme-border-main rounded-2xl p-5 backdrop-blur-md shadow-xl text-left font-mono relative overflow-hidden transition-all duration-300 hover:border-theme-accent hover:shadow-[0_0_20px_rgba(168,85,247,0.12)] group z-20">
         
