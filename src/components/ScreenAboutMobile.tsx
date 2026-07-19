@@ -24,13 +24,7 @@ export default function ScreenAboutMobile({ isDarkMode }: { isDarkMode: boolean 
   return (
     <div className="w-full max-w-md mx-auto flex flex-col gap-6 py-6 px-4 select-none">
       
-      {/* 1. PORTRAIT VIEWPORT */}
-      <div className="relative w-full z-20">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-theme-accent/5 rounded-full blur-3xl pointer-events-none" />
-        <PlayerScan isDarkMode={isDarkMode} className="w-full h-[400px] sm:h-[420px]" />
-      </div>
-
-      {/* 2. PILOT PROFILE CARD (Combines PLAYER_CARD & RECRUIT_CLASS info) */}
+      {/* 1. PILOT PROFILE CARD (Combines PLAYER_CARD & RECRUIT_CLASS info) */}
       <div className="w-full bg-theme-cell border border-theme-border-main rounded-2xl p-5 backdrop-blur-md shadow-xl text-left font-mono relative overflow-hidden transition-all duration-300 hover:border-theme-accent hover:shadow-[0_0_20px_rgba(168,85,247,0.12)] group z-20">
         
         {/* Terminal Header Telemetry */}
@@ -73,6 +67,12 @@ export default function ScreenAboutMobile({ isDarkMode }: { isDarkMode: boolean 
           </div>
         </div>
 
+      </div>
+
+      {/* 2. PORTRAIT VIEWPORT */}
+      <div className="relative w-full z-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-theme-accent/5 rounded-full blur-3xl pointer-events-none" />
+        <PlayerScan isDarkMode={isDarkMode} className="w-full h-[400px] sm:h-[420px]" />
       </div>
 
       {/* 3. SCOUTING REPORT DOSSIER CARD */}

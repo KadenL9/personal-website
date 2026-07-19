@@ -23,11 +23,11 @@ export interface ContactLink {
 }
 
 export const projects: Project[] = [
+    { id: "PORTFOLIO", title: "Portfolio Website", desc: "Personal portfolio website to showcase projects, technical skills, and experience.", tech: "[TS][CSS][JS][Node.js]", link: "https://github.com/KadenL9/personal-website"},
     { id: "DASHBOARD", title: "NBA Stats Analyzer", desc: "Dashboard that visualizes statistical breakdowns of NBA players.", tech: "[PYTHON][Tkinter][Matplotlib]", link: "https://github.com/KadenL9/NBA-Stats-Visualizer" },
-    { id: "GAME 2", title: "Wordle Clone", desc: "Custom clone of the popular New York Times game Wordle.", tech: "[Python][Pygame]", link: "https://github.com/KadenL9/Wordle-Clone" },
-    { id: "GAME 1", title: "2048 Clone", desc: "Custom clone of the popular mobile game 2048.", tech: "[Python][Pygame]", link: "https://github.com/KadenL9/2048" },
     { id: "PLUGIN", title: "Minecraft DeathSwap", desc: "Custom Minecraft plugin. Game where players try to kill each other when swapping positions.", tech: "[Java][Spigot API]", link: "https://github.com/KadenL9/MinecraftDeathSwap" },
-    { id: "PORTFOLIO", title: "Portfolio Website", desc: "Personal portfolio website to showcase projects, technical skills, and experience.", tech: "[TS][CSS][JS][Node.js]", link: "https://github.com/KadenL9/personal-website"}
+    { id: "GAME 1", title: "2048 Clone", desc: "Custom clone of the popular mobile game 2048.", tech: "[Python][Pygame]", link: "https://github.com/KadenL9/2048" },
+    { id: "GAME 2", title: "Wordle Clone", desc: "Custom clone of the popular New York Times game Wordle.", tech: "[Python][Pygame]", link: "https://github.com/KadenL9/Wordle-Clone" }
 ];
 
 export const experiences: Experience[] = [

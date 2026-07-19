@@ -14,6 +14,14 @@ export default function ScreenExperienceMobile({ experiences }: { experiences: E
   return (
     <div className="relative w-full max-w-md mx-auto py-8 px-4 z-10 font-mono text-left select-none">
       
+      {/* Mobile / Tablet Header Accent */}
+      <div className="flex items-center gap-3 border-b border-theme-border-subtle/50 pb-4 mb-6">
+        <Briefcase className="w-5 h-5 text-theme-accent animate-pulse" />
+        <h2 className="text-lg font-black tracking-widest uppercase font-mono text-foreground">
+          EXPERIENCE
+        </h2>
+      </div>
+
       {/* Dynamic Scrolling Container Wrapper */}
       <div className="relative w-full flex flex-col gap-8">
         

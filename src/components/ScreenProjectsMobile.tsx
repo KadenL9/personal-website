@@ -18,7 +18,7 @@ export default function ScreenProjectsMobile({ projects }: { projects: Project[]
             <div className="flex items-center gap-3 border-b border-theme-border-subtle/50 pb-4 mb-2">
                 <Cpu className="w-5 h-5 text-theme-accent animate-pulse" />
                 <h2 className="text-lg font-black tracking-widest uppercase font-mono text-foreground">
-                    SYSTEM_PROJECTS
+                    PROJECTS
                 </h2>
             </div>
 
